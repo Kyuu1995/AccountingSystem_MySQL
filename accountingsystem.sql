@@ -30,7 +30,12 @@ CREATE TABLE `expenditure` (
   `item_no` enum('1','2','3','4','5','6','7','8') COLLATE utf8mb4_unicode_ci NOT NULL,
   `amount` int NOT NULL,
   `notes` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`expenditure_no`)
+  `user_no` int NOT NULL,
+  PRIMARY KEY (`expenditure_no`),
+  KEY `fk_expenditure_item_expenditure1_idx` (`item_no`),
+  KEY `fk_expenditure_user_number1_idx` (`user_no`),
+  CONSTRAINT `fk_expenditure_item_expenditure1` FOREIGN KEY (`item_no`) REFERENCES `item_expenditure` (`item_expenditure_no`),
+  CONSTRAINT `fk_expenditure_user_number1` FOREIGN KEY (`user_no`) REFERENCES `user_number` (`user_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -56,8 +61,13 @@ CREATE TABLE `income` (
   `item_no` enum('1','2','3','4','5','6') COLLATE utf8mb4_unicode_ci NOT NULL,
   `amount` int NOT NULL,
   `notes` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`income_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `user_no` int NOT NULL,
+  PRIMARY KEY (`income_no`),
+  KEY `fk_income_item_income_idx` (`item_no`),
+  KEY `fk_income_user_number1_idx` (`user_no`),
+  CONSTRAINT `fk_income_item_income` FOREIGN KEY (`item_no`) REFERENCES `item_income` (`item_income_no`),
+  CONSTRAINT `fk_income_user_number1` FOREIGN KEY (`user_no`) REFERENCES `user_number` (`user_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +76,7 @@ CREATE TABLE `income` (
 
 LOCK TABLES `income` WRITE;
 /*!40000 ALTER TABLE `income` DISABLE KEYS */;
-INSERT INTO `income` VALUES (1,'2022-08-22','1',60,'nice'),(2,'2022-08-22','1',60,'ok');
+INSERT INTO `income` VALUES (1,'2022-08-22','1',60,'nice',1),(2,'2022-08-22','1',60,'ok',1),(3,'2022-08-22','2',6000,'房租',1);
 /*!40000 ALTER TABLE `income` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,6 +127,59 @@ LOCK TABLES `item_income` WRITE;
 INSERT INTO `item_income` VALUES ('1','食物'),('2','居住'),('3','交通'),('4','娛樂'),('5','物品'),('6','其他');
 /*!40000 ALTER TABLE `item_income` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `user_data`
+--
+
+DROP TABLE IF EXISTS `user_data`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_data` (
+  `username` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nickname` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` enum('男','女') COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_data`
+--
+
+LOCK TABLES `user_data` WRITE;
+/*!40000 ALTER TABLE `user_data` DISABLE KEYS */;
+INSERT INTO `user_data` VALUES ('kyuu1995','kyuu1995','Kyuu','kyuu19950212@gmail.com','男');
+/*!40000 ALTER TABLE `user_data` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_number`
+--
+
+DROP TABLE IF EXISTS `user_number`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_number` (
+  `user_no` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`user_no`),
+  KEY `fk_user_number_user_data1_idx` (`username`),
+  CONSTRAINT `fk_user_number_user_data1` FOREIGN KEY (`username`) REFERENCES `user_data` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_number`
+--
+
+LOCK TABLES `user_number` WRITE;
+/*!40000 ALTER TABLE `user_number` DISABLE KEYS */;
+INSERT INTO `user_number` VALUES (1,'kyuu1995');
+/*!40000 ALTER TABLE `user_number` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -127,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-23 16:16:28
+-- Dump completed on 2022-08-25  9:18:55
