@@ -67,7 +67,7 @@ CREATE TABLE `income` (
   KEY `fk_income_user_number1_idx` (`user_no`),
   CONSTRAINT `fk_income_item_income` FOREIGN KEY (`item_no`) REFERENCES `item_income` (`item_income_no`),
   CONSTRAINT `fk_income_user_number1` FOREIGN KEY (`user_no`) REFERENCES `user_number` (`user_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `income` (
 
 LOCK TABLES `income` WRITE;
 /*!40000 ALTER TABLE `income` DISABLE KEYS */;
-INSERT INTO `income` VALUES (1,'2022-08-22','1',60,'nice',1),(2,'2022-08-22','1',60,'ok',1),(3,'2022-08-22','2',6000,'房租',1);
+INSERT INTO `income` VALUES (1,'2022-08-22','1',60,'nice',1),(2,'2022-08-22','1',60,'ok',1),(3,'2022-08-22','2',6000,'房租',1),(4,'2022-08-22','3',120,'加油',1),(5,'2022-08-22','1',200,'拉麵',2),(6,'2022-08-22','2',5000,'房租',2),(7,'2022-08-23','4',170,'電影',1),(8,'2022-08-23','5',200,'眼藥水',1);
 /*!40000 ALTER TABLE `income` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +151,7 @@ CREATE TABLE `user_data` (
 
 LOCK TABLES `user_data` WRITE;
 /*!40000 ALTER TABLE `user_data` DISABLE KEYS */;
-INSERT INTO `user_data` VALUES ('kyuu1995','kyuu1995','Kyuu','kyuu19950212@gmail.com','男');
+INSERT INTO `user_data` VALUES ('annie1996','annie1996','Annie','annie19961031@gmail.com','女'),('kyuu1995','kyuu1995','Kyuu','kyuu19950212@gmail.com','男');
 /*!40000 ALTER TABLE `user_data` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,7 +168,7 @@ CREATE TABLE `user_number` (
   PRIMARY KEY (`user_no`),
   KEY `fk_user_number_user_data1_idx` (`username`),
   CONSTRAINT `fk_user_number_user_data1` FOREIGN KEY (`username`) REFERENCES `user_data` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +177,7 @@ CREATE TABLE `user_number` (
 
 LOCK TABLES `user_number` WRITE;
 /*!40000 ALTER TABLE `user_number` DISABLE KEYS */;
-INSERT INTO `user_number` VALUES (1,'kyuu1995');
+INSERT INTO `user_number` VALUES (2,'annie1996'),(1,'kyuu1995');
 /*!40000 ALTER TABLE `user_number` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -190,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-25  9:18:55
+-- Dump completed on 2022-08-25 16:30:04
