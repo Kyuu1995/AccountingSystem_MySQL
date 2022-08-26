@@ -27,16 +27,16 @@ DROP TABLE IF EXISTS `expenditure`;
 CREATE TABLE `expenditure` (
   `expenditure_no` int NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
-  `item_no` enum('1','2','3','4','5','6','7','8') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `item_no` enum('1','2','3','4','5','6') COLLATE utf8mb4_unicode_ci NOT NULL,
   `amount` int NOT NULL,
   `notes` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_no` int NOT NULL,
   PRIMARY KEY (`expenditure_no`),
-  KEY `fk_expenditure_item_expenditure1_idx` (`item_no`),
-  KEY `fk_expenditure_user_number1_idx` (`user_no`),
-  CONSTRAINT `fk_expenditure_item_expenditure1` FOREIGN KEY (`item_no`) REFERENCES `item_expenditure` (`item_expenditure_no`),
-  CONSTRAINT `fk_expenditure_user_number1` FOREIGN KEY (`user_no`) REFERENCES `user_number` (`user_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `fk_income_item_income_idx` (`item_no`),
+  KEY `fk_expenditure_user_data1_idx` (`user_no`),
+  CONSTRAINT `fk_expenditure_user_data1` FOREIGN KEY (`user_no`) REFERENCES `user_data` (`user_no`),
+  CONSTRAINT `fk_income_item_income` FOREIGN KEY (`item_no`) REFERENCES `item_expenditure` (`item_expenditure_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +45,7 @@ CREATE TABLE `expenditure` (
 
 LOCK TABLES `expenditure` WRITE;
 /*!40000 ALTER TABLE `expenditure` DISABLE KEYS */;
+INSERT INTO `expenditure` VALUES (1,'2022-05-14','1',85,'便當',1),(2,'2022-05-14','3',100,'加油',1),(3,'2022-05-15','2',6000,'房租',1),(4,'2022-05-15','3',120,'加油',1),(5,'2022-05-16','1',200,'拉麵',1),(6,'2022-05-17','5',50000,'電腦',1),(7,'2022-05-17','4',170,'電影',1),(8,'2022-05-17','5',1200,'衣服',1),(9,'2022-05-19','3',320,'火車',1),(10,'2022-05-19','4',3000,'手遊',1),(11,'2022-05-20','1',300,'牛排',1);
 /*!40000 ALTER TABLE `expenditure` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,16 +59,16 @@ DROP TABLE IF EXISTS `income`;
 CREATE TABLE `income` (
   `income_no` int NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
-  `item_no` enum('1','2','3','4','5','6') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `item_no` enum('1','2','3','4','5','6','7','8') COLLATE utf8mb4_unicode_ci NOT NULL,
   `amount` int NOT NULL,
   `notes` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_no` int NOT NULL,
   PRIMARY KEY (`income_no`),
-  KEY `fk_income_item_income_idx` (`item_no`),
-  KEY `fk_income_user_number1_idx` (`user_no`),
-  CONSTRAINT `fk_income_item_income` FOREIGN KEY (`item_no`) REFERENCES `item_income` (`item_income_no`),
-  CONSTRAINT `fk_income_user_number1` FOREIGN KEY (`user_no`) REFERENCES `user_number` (`user_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `fk_expenditure_item_expenditure1_idx` (`item_no`),
+  KEY `fk_income_user_data1_idx` (`user_no`),
+  CONSTRAINT `fk_expenditure_item_expenditure1` FOREIGN KEY (`item_no`) REFERENCES `item_income` (`item_income_no`),
+  CONSTRAINT `fk_income_user_data1` FOREIGN KEY (`user_no`) REFERENCES `user_data` (`user_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +77,7 @@ CREATE TABLE `income` (
 
 LOCK TABLES `income` WRITE;
 /*!40000 ALTER TABLE `income` DISABLE KEYS */;
-INSERT INTO `income` VALUES (1,'2022-08-22','1',60,'nice',1),(2,'2022-08-22','1',60,'ok',1),(3,'2022-08-22','2',6000,'房租',1),(4,'2022-08-22','3',120,'加油',1),(5,'2022-08-22','1',200,'拉麵',2),(6,'2022-08-22','2',5000,'房租',2),(7,'2022-08-23','4',170,'電影',1),(8,'2022-08-23','5',200,'眼藥水',1);
+INSERT INTO `income` VALUES (1,'2022-08-05','1',36000,NULL,1),(2,'2022-08-15','8',10,'撿到錢',1),(3,'2022-08-26','8',2000,'中發票',1);
 /*!40000 ALTER TABLE `income` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +89,7 @@ DROP TABLE IF EXISTS `item_expenditure`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `item_expenditure` (
-  `item_expenditure_no` enum('1','2','3','4','5','6','7','8') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `item_expenditure_no` enum('1','2','3','4','5','6') COLLATE utf8mb4_unicode_ci NOT NULL,
   `item_expenditure_name` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`item_expenditure_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -100,7 +101,7 @@ CREATE TABLE `item_expenditure` (
 
 LOCK TABLES `item_expenditure` WRITE;
 /*!40000 ALTER TABLE `item_expenditure` DISABLE KEYS */;
-INSERT INTO `item_expenditure` VALUES ('1','薪水'),('2','獎金'),('3','分紅'),('4','股票'),('5','基金'),('6','期貨'),('7','保險'),('8','其他');
+INSERT INTO `item_expenditure` VALUES ('1','食物'),('2','居住'),('3','交通'),('4','娛樂'),('5','物品'),('6','其他');
 /*!40000 ALTER TABLE `item_expenditure` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +113,7 @@ DROP TABLE IF EXISTS `item_income`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `item_income` (
-  `item_income_no` enum('1','2','3','4','5','6') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `item_income_no` enum('1','2','3','4','5','6','7','8') COLLATE utf8mb4_unicode_ci NOT NULL,
   `item_income_name` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`item_income_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -124,7 +125,7 @@ CREATE TABLE `item_income` (
 
 LOCK TABLES `item_income` WRITE;
 /*!40000 ALTER TABLE `item_income` DISABLE KEYS */;
-INSERT INTO `item_income` VALUES ('1','食物'),('2','居住'),('3','交通'),('4','娛樂'),('5','物品'),('6','其他');
+INSERT INTO `item_income` VALUES ('1','薪水'),('2','獎金'),('3','分紅'),('4','股票'),('5','基金'),('6','期貨'),('7','保險'),('8','其他');
 /*!40000 ALTER TABLE `item_income` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,13 +137,15 @@ DROP TABLE IF EXISTS `user_data`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_data` (
+  `user_no` int NOT NULL AUTO_INCREMENT,
   `username` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nickname` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gender` enum('男','女') COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`user_no`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,34 +154,8 @@ CREATE TABLE `user_data` (
 
 LOCK TABLES `user_data` WRITE;
 /*!40000 ALTER TABLE `user_data` DISABLE KEYS */;
-INSERT INTO `user_data` VALUES ('annie1996','annie1996','Annie','annie19961031@gmail.com','女'),('kyuu1995','kyuu1995','Kyuu','kyuu19950212@gmail.com','男');
+INSERT INTO `user_data` VALUES (1,'annie1996','annie1996','Annie','annie19961031@gmail.com','女'),(2,'kyuu1995','kyuu1995','Kyuu','kyuu19950212@gmail.com','男');
 /*!40000 ALTER TABLE `user_data` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user_number`
---
-
-DROP TABLE IF EXISTS `user_number`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_number` (
-  `user_no` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`user_no`),
-  KEY `fk_user_number_user_data1_idx` (`username`),
-  CONSTRAINT `fk_user_number_user_data1` FOREIGN KEY (`username`) REFERENCES `user_data` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user_number`
---
-
-LOCK TABLES `user_number` WRITE;
-/*!40000 ALTER TABLE `user_number` DISABLE KEYS */;
-INSERT INTO `user_number` VALUES (2,'annie1996'),(1,'kyuu1995');
-/*!40000 ALTER TABLE `user_number` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -190,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-25 16:30:04
+-- Dump completed on 2022-08-26 16:26:29
