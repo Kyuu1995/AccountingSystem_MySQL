@@ -37,7 +37,7 @@ CREATE TABLE `account` (
   KEY `fk_account_item1_idx` (`type_no`,`item_no`),
   CONSTRAINT `fk_account_item1` FOREIGN KEY (`type_no`, `item_no`) REFERENCES `item` (`type_no`, `item_no`),
   CONSTRAINT `fk_account_user_data` FOREIGN KEY (`user_no`) REFERENCES `user` (`user_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES (14,'1','2022-07-05',2,3000,'',1),(16,'1','2022-08-08',8,100,'撿到錢',1),(17,'1','2022-08-05',1,38000,'',1),(18,'2','2022-07-01',1,100,'便當',1),(19,'2','2022-08-01',3,120,'加油',1),(20,'1','2022-08-17',7,30000,'',1),(21,'2','2022-08-01',2,5000,'房租',1),(22,'1','2022-07-01',1,38000,'',1),(23,'2','2022-08-03',3,320,'火車',1),(24,'1','2022-08-18',4,2000,'股息',1),(25,'2','2022-08-04',4,320,'電影',1);
+INSERT INTO `account` VALUES (14,'1','2022-07-05',2,3000,'',1),(17,'1','2022-08-05',1,38000,'沒加班',1),(18,'2','2022-07-01',1,100,'便當',1),(19,'2','2022-08-01',3,120,'加油',1),(20,'1','2022-08-17',7,30000,'防疫保單',1),(22,'1','2022-07-01',1,38000,'',1),(23,'2','2022-08-03',3,320,'火車',1),(24,'1','2022-08-18',4,20000,'股息',1),(25,'2','2022-08-04',4,320,'電影',1),(26,'2','2022-08-05',1,200,'火鍋',1),(27,'2','2022-08-05',2,1500,'電費',1),(28,'2','2022-08-05',5,120,'布袋',1),(29,'1','2022-08-31',8,3000,'加班費',1);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,4 +138,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-29 16:26:46
+-- Dump completed on 2022-08-31 16:26:46
