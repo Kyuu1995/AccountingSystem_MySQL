@@ -37,7 +37,7 @@ CREATE TABLE `account` (
   KEY `fk_account_item1_idx` (`type_no`,`item_no`),
   CONSTRAINT `fk_account_item1` FOREIGN KEY (`type_no`, `item_no`) REFERENCES `item` (`type_no`, `item_no`),
   CONSTRAINT `fk_account_user_data` FOREIGN KEY (`user_no`) REFERENCES `user` (`user_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES (14,'1','2022-07-05',2,3000,'',1),(17,'1','2022-08-05',1,38000,'沒加班',1),(18,'2','2022-07-01',1,100,'便當',1),(19,'2','2022-08-01',3,120,'加油',1),(20,'1','2022-08-17',7,30000,'防疫保單',1),(22,'1','2022-07-01',1,38000,'',1),(23,'2','2022-08-03',3,320,'火車',1),(24,'1','2022-08-18',4,20000,'股息',1),(25,'2','2022-08-04',4,320,'電影',1),(26,'2','2022-08-05',1,200,'火鍋',1),(27,'2','2022-08-05',2,1500,'電費',1),(28,'2','2022-08-05',5,120,'布袋',1),(29,'1','2022-08-31',8,3000,'加班費',1);
+INSERT INTO `account` VALUES (17,'1','2022-08-05',1,38000,'',1),(19,'2','2022-08-01',3,120,'加油',1),(20,'1','2022-08-17',7,30000,'防疫保單',1),(22,'1','2022-07-01',1,38000,'',1),(23,'2','2022-08-03',3,320,'火車',1),(24,'1','2022-08-18',4,20000,'股息',1),(25,'2','2022-08-04',4,320,'電影',1),(26,'2','2022-08-05',1,200,'火鍋',1),(27,'2','2022-08-05',2,1500,'電費',1),(28,'2','2022-08-05',5,120,'布袋',1),(29,'1','2022-08-31',8,3000,'加班費',1),(30,'1','2022-09-01',1,38000,'',1),(32,'2','2022-09-01',2,6000,'房租',1);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,13 +110,13 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_no` int NOT NULL AUTO_INCREMENT,
   `username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `nickname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `gender` enum('男','女') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`user_no`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +125,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'kyuu1995','0212','Kyuu','kyuu19950212@gmail.com','男'),(2,'annie1996','1031','Annie','annie19961031@gmail.com','女'),(3,'jenny1998','0412','Jenny','jenny19980412@gmail.com','女');
+INSERT INTO `user` VALUES (1,'kyuu1995','f7d63bbdc0fda6d3c6ae9c061a86910d','Kyuu','kyuu19950212@gmail.com','男'),(2,'annie1996','afdec7005cc9f14302cd0474fd0f3c96','Annie','annie19961031@gmail.com','女'),(3,'jenny1998','69a829ce4f4e0d631ca634a866590a60','Jenny','jenny19980412@gmail.com','女'),(9,'peter1993','6ace73484d45f4c2ba13ec972dad64be','Peter','peter19930512@gmail.com','男');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -138,4 +138,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-31 16:26:46
+-- Dump completed on 2022-09-04 22:07:52
